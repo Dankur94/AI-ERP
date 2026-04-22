@@ -1,0 +1,47 @@
+﻿# Dependencies
+node_modules/
+vendor/
+.venv/
+__pycache__/
+
+# Environment + Credentials
+.env
+.env.local
+.env.*.local
+config.yaml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build
+dist/
+build/
+out/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Database (local data)
+*.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Backups
+*.bak
+backups/
+
+# Coverage
+coverage/
+.nyc_output/

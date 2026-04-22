@@ -1,0 +1,15 @@
+﻿# Konfiguration fuer AI ERP
+# Kopiere diese Datei zu config.yaml und trage echte Werte ein:
+#   cp config.example.yaml config.yaml
+#
+# WICHTIG: config.yaml ist in .gitignore ??wird NICHT ins Repo committed.
+# Jede Umgebung (lokal, VM) hat ihre eigene config.yaml.
+
+app:
+  name: AI ERP
+  debug: false
+
+# Fuege hier projekt-spezifische Config hinzu:
+# api_key: YOUR_API_KEY
+# database:
+#   path: data.db
