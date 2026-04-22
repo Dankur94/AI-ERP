@@ -1,0 +1,12 @@
+{
+  "name": "lean-hierarchy",
+  "version": "1.0.0",
+  "description": "Lean Desktop-App zur Organisation von SaaS-Projekten mit 4-Ebenen-Hierarchie",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^35.0.0"
+  }
+}

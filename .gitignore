@@ -34,6 +34,10 @@ out/
 # Database (local data)
 *.db
 
+# Vault (user data)
+vault/
+.claude-context.md
+
 # Logs
 *.log
 npm-debug.log*

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="tree.css">
+  <title>Tree</title>
+</head>
+<body>
+  <div class="titlebar" style="-webkit-app-region: drag;">
+    <span class="titlebar-text">Tree</span>
+    <div class="titlebar-controls" style="-webkit-app-region: no-drag;">
+      <button class="titlebar-btn btn-quit" id="btn-quit" title="Quit All (Ctrl+Shift+Q)">&#x23FB;</button>
+      <button class="titlebar-btn" id="btn-close" title="Close">&times;</button>
+    </div>
+  </div>
+  <div class="toolbar">
+    <button id="btn-add-root" title="Add top-level node">+</button>
+    <div class="toolbar-spacer"></div>
+    <button id="btn-sub-claude" class="toolbar-claude" title="Sub-Claude: Fragen zu Inhalten stellen">sub</button>
+    <button id="btn-new-claude" class="toolbar-claude" title="Neues Claude Code Fenster (Ausgangsfenster)">+Claude</button>
+  </div>
+  <div id="tree-container"></div>
+  <div id="context-menu" class="context-menu hidden"></div>
+  <script src="tree.js"></script>
+</body>
+</html>
