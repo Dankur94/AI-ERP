@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>LeanHierarchy</title>
+<style>
+:root {
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #252525;
+  --bg-hover: #2d2d2d;
+  --bg-selected: #37373d;
+  --text-primary: #dcddde;
+  --text-secondary: #8e8e8e;
+  --accent: #7f6df2;
+  --border: #333333;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* --- Panels --- */
+#tree-panel, #content-panel {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
+}
+
+#content-panel {
+  transform: translateX(100%);
+}
+
+body.show-content #tree-panel {
+  transform: translateX(-30%);
+  pointer-events: none;
+}
+
+body.show-content #content-panel {
+  transform: translateX(0);
+}
+
+/* --- Header bars --- */
+.header {
+  height: 52px;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+#btn-back {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 4px 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+#btn-back svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Search --- */
+#search-wrap {
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+#search-input {
+  width: 100%;
+  height: 36px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 15px;
+  padding: 0 12px;
+  outline: none;
+}
+
+#search-input:focus {
+  border-color: var(--accent);
+}
+
+#search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* --- Tree --- */
+#tree-container {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0;
+}
+
+.tree-node {
+  user-select: none;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.4);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tree-row:active {
+  background: var(--bg-hover);
+}
+
+.chevron {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.chevron.invisible {
+  visibility: hidden;
+}
+
+.node-number {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.node-title {
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tree-children {
+  margin-left: 20px;
+}
+
+.tree-children.collapsed {
+  display: none;
+}
+
+.tree-row.match-highlight .node-title {
+  color: var(--accent);
+}
+
+/* --- Content --- */
+#content-header .header-title {
+  font-size: 15px;
+}
+
+#content-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+#content-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+#content-text {
+  font-size: 15px;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+/* Markdown rendering */
+#content-text h1 { font-size: 22px; font-weight: 700; margin: 20px 0 10px; color: var(--text-primary); }
+#content-text h2 { font-size: 19px; font-weight: 600; margin: 18px 0 8px; color: var(--text-primary); }
+#content-text h3 { font-size: 17px; font-weight: 600; margin: 14px 0 6px; color: var(--text-primary); }
+#content-text h4 { font-size: 15px; font-weight: 600; margin: 12px 0 4px; color: var(--text-primary); }
+
+#content-text p { margin: 0 0 12px; }
+
+#content-text ul, #content-text ol {
+  margin: 0 0 12px;
+  padding-left: 24px;
+}
+
+#content-text li { margin-bottom: 4px; }
+
+#content-text strong { color: #fff; }
+
+#content-text code {
+  background: var(--bg-hover);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 13px;
+}
+
+#content-text pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  margin: 0 0 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#content-text pre code {
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#content-text hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 16px 0;
+}
+
+#content-text table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 12px;
+  font-size: 14px;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#content-text th, #content-text td {
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  text-align: left;
+}
+
+#content-text th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+}
+
+#content-text blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 12px;
+}
+
+/* --- Loading / Error --- */
+#loading {
+  display: none;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+#error-msg {
+  display: none;
+  padding: 20px;
+  color: #ff5555;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* --- Scrollbar (desktop) --- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- Tree Panel -->
+<div id="tree-panel">
+  <div class="header">
+    <span class="header-title">LeanHierarchy</span>
+  </div>
+  <div id="search-wrap">
+    <input type="search" id="search-input" placeholder="Suchen...">
+  </div>
+  <div id="tree-container"></div>
+  <div id="loading">Lade...</div>
+  <div id="error-msg"></div>
+</div>
+
+<!-- Content Panel -->
+<div id="content-panel">
+  <div class="header" id="content-header">
+    <button id="btn-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      Zurueck
+    </button>
+    <span class="header-title" id="content-header-title"></span>
+  </div>
+  <div id="content-body">
+    <div id="content-title"></div>
+    <div id="content-text"></div>
+  </div>
+</div>
+
+<script>
+// --- State ---
+let treeData = { nodes: [] };
+let collapsedSet = new Set();
+let searchTerm = '';
+let matchingIds = new Set();
+
+const BASE = '../vault/';
+const treeContainer = document.getElementById('tree-container');
+const loadingEl = document.getElementById('loading');
+const errorEl = document.getElementById('error-msg');
+const searchInput = document.getElementById('search-input');
+
+// --- Init ---
+async function init() {
+  loadingEl.style.display = 'flex';
+  try {
+    const resp = await fetch(BASE + 'tree.json');
+    if (!resp.ok) throw new Error('tree.json nicht gefunden (' + resp.status + ')');
+    treeData = await resp.json();
+    loadingEl.style.display = 'none';
+    render();
+  } catch (e) {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+    errorEl.textContent = 'Fehler: ' + e.message;
+  }
+}
+
+// --- Find node ---
+function findNode(nodes, id) {
+  for (const node of nodes) {
+    if (node.id === id) return node;
+    if (node.children) {
+      const found = findNode(node.children, id);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+// --- Search: collect matching IDs and their ancestors ---
+function collectMatchIds(nodes, term) {
+  const ids = new Set();
+  function walk(nodes) {
+    let anyMatch = false;
+    for (const node of nodes) {
+      const titleMatch = node.title.toLowerCase().includes(term);
+      let childMatch = false;
+      if (node.children && node.children.length > 0) {
+        childMatch = walk(node.children);
+      }
+      if (titleMatch || childMatch) {
+        ids.add(node.id);
+        anyMatch = true;
+      }
+    }
+    return anyMatch;
+  }
+  walk(nodes);
+  return ids;
+}
+
+// --- Render ---
+function render() {
+  treeContainer.innerHTML = '';
+  renderNodes(treeData.nodes, treeContainer, '');
+}
+
+function renderNodes(nodes, parentEl, prefix) {
+  nodes.forEach((node, index) => {
+    // If searching, skip non-matching nodes
+    if (searchTerm && !matchingIds.has(node.id)) return;
+
+    const num = prefix ? prefix + '.' + (index + 1) : '' + (index + 1);
+    const hasChildren = node.children && node.children.length > 0;
+    const isCollapsed = collapsedSet.has(node.id);
+
+    const nodeEl = document.createElement('div');
+    nodeEl.className = 'tree-node';
+
+    const row = document.createElement('div');
+    row.className = 'tree-row';
+
+    // Highlight title match
+    if (searchTerm && node.title.toLowerCase().includes(searchTerm)) {
+      row.classList.add('match-highlight');
+    }
+
+    // Chevron
+    const chevron = document.createElement('span');
+    chevron.className = 'chevron' + (hasChildren ? '' : ' invisible');
+    chevron.textContent = hasChildren ? (isCollapsed ? '\u25B8' : '\u25BE') : '';
+    chevron.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleCollapse(node.id);
+    });
+
+    // Number
+    const numSpan = document.createElement('span');
+    numSpan.className = 'node-number';
+    numSpan.textContent = num;
+
+    // Title
+    const titleSpan = document.createElement('span');
+    titleSpan.className = 'node-title';
+    titleSpan.textContent = node.title;
+
+    row.appendChild(chevron);
+    row.appendChild(numSpan);
+    row.appendChild(titleSpan);
+
+    // Tap -> open content
+    row.addEventListener('click', () => openNode(node.id, node.title));
+
+    nodeEl.appendChild(row);
+
+    if (hasChildren) {
+      const childContainer = document.createElement('div');
+      // When searching, force-expand all matching paths
+      const forceExpand = searchTerm.length > 0;
+      childContainer.className = 'tree-children' + (!forceExpand && isCollapsed ? ' collapsed' : '');
+      renderNodes(node.children, childContainer, num);
+      nodeEl.appendChild(childContainer);
+    }
+
+    parentEl.appendChild(nodeEl);
+  });
+}
+
+// --- Toggle collapse ---
+function toggleCollapse(id) {
+  if (collapsedSet.has(id)) collapsedSet.delete(id);
+  else collapsedSet.add(id);
+  render();
+}
+
+// --- Open node content ---
+async function openNode(id, title) {
+  document.getElementById('content-header-title').textContent = title;
+  document.getElementById('content-title').textContent = title;
+  document.getElementById('content-text').innerHTML = '<p style="color:var(--text-secondary)">Lade...</p>';
+  document.body.classList.add('show-content');
+
+  try {
+    const resp = await fetch(BASE + 'nodes/' + id + '.md');
+    if (!resp.ok) {
+      document.getElementById('content-text').innerHTML = '<p style="color:var(--text-secondary)">(Kein Inhalt)</p>';
+      return;
+    }
+    const md = await resp.text();
+    document.getElementById('content-text').innerHTML = renderMarkdown(md);
+  } catch (e) {
+    document.getElementById('content-text').innerHTML = '<p style="color:#ff5555">Fehler: ' + escapeHtml(e.message) + '</p>';
+  }
+}
+
+// --- Back button ---
+document.getElementById('btn-back').addEventListener('click', () => {
+  document.body.classList.remove('show-content');
+});
+
+// --- Search ---
+let searchTimeout;
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchTerm = searchInput.value.trim().toLowerCase();
+    if (searchTerm) {
+      matchingIds = collectMatchIds(treeData.nodes, searchTerm);
+    } else {
+      matchingIds = new Set();
+    }
+    render();
+  }, 200);
+});
+
+// --- Simple Markdown renderer ---
+function renderMarkdown(text) {
+  // Normalize line endings
+  text = text.replace(/\r\n/g, '\n');
+
+  // Split into blocks for code fence handling
+  const lines = text.split('\n');
+  let html = '';
+  let inCodeBlock = false;
+  let codeContent = '';
+  let inTable = false;
+  let tableRows = [];
+  let inList = false;
+  let listType = '';
+  let listItems = [];
+
+  function flushList() {
+    if (!inList) return;
+    const tag = listType === 'ol' ? 'ol' : 'ul';
+    html += '<' + tag + '>' + listItems.join('') + '</' + tag + '>';
+    inList = false;
+    listItems = [];
+  }
+
+  function flushTable() {
+    if (!inTable) return;
+    html += '<table>';
+    tableRows.forEach((row, i) => {
+      // Skip separator rows (|---|---|)
+      if (/^\|[\s\-:|]+\|$/.test(row.trim())) return;
+      const tag = i === 0 ? 'th' : 'td';
+      const cells = row.split('|').slice(1, -1);
+      html += '<tr>' + cells.map(c => '<' + tag + '>' + inlineFormat(c.trim()) + '</' + tag + '>').join('') + '</tr>';
+    });
+    html += '</table>';
+    inTable = false;
+    tableRows = [];
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Code fences
+    if (line.trim().startsWith('```')) {
+      if (inCodeBlock) {
+        html += '<pre><code>' + escapeHtml(codeContent.replace(/\n$/, '')) + '</code></pre>';
+        codeContent = '';
+        inCodeBlock = false;
+      } else {
+        flushList();
+        flushTable();
+        inCodeBlock = true;
+      }
+      continue;
+    }
+
+    if (inCodeBlock) {
+      codeContent += line + '\n';
+      continue;
+    }
+
+    // Table rows
+    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+      flushList();
+      if (!inTable) inTable = true;
+      tableRows.push(line.trim());
+      continue;
+    } else if (inTable) {
+      flushTable();
+    }
+
+    // Blank line
+    if (line.trim() === '') {
+      flushList();
+      continue;
+    }
+
+    // Headings
+    const headingMatch = line.match(/^(#{1,4})\s+(.+)/);
+    if (headingMatch) {
+      flushList();
+      const level = headingMatch[1].length;
+      html += '<h' + level + '>' + inlineFormat(headingMatch[2]) + '</h' + level + '>';
+      continue;
+    }
+
+    // Horizontal rule
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) {
+      flushList();
+      html += '<hr>';
+      continue;
+    }
+
+    // Blockquote
+    if (line.trim().startsWith('> ')) {
+      flushList();
+      html += '<blockquote>' + inlineFormat(line.trim().slice(2)) + '</blockquote>';
+      continue;
+    }
+
+    // Unordered list
+    const ulMatch = line.match(/^(\s*)[-*+]\s+(.+)/);
+    if (ulMatch) {
+      if (!inList || listType !== 'ul') {
+        flushList();
+        inList = true;
+        listType = 'ul';
+      }
+      listItems.push('<li>' + inlineFormat(ulMatch[2]) + '</li>');
+      continue;
+    }
+
+    // Ordered list
+    const olMatch = line.match(/^(\s*)\d+\.\s+(.+)/);
+    if (olMatch) {
+      if (!inList || listType !== 'ol') {
+        flushList();
+        inList = true;
+        listType = 'ol';
+      }
+      listItems.push('<li>' + inlineFormat(olMatch[2]) + '</li>');
+      continue;
+    }
+
+    // Paragraph
+    flushList();
+    html += '<p>' + inlineFormat(line) + '</p>';
+  }
+
+  // Flush remaining
+  if (inCodeBlock) {
+    html += '<pre><code>' + escapeHtml(codeContent.replace(/\n$/, '')) + '</code></pre>';
+  }
+  flushList();
+  flushTable();
+
+  return html;
+}
+
+function inlineFormat(text) {
+  text = escapeHtml(text);
+  // Bold
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Italic
+  text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  // Inline code
+  text = text.replace(/`(.+?)`/g, '<code>$1</code>');
+  return text;
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// --- Start ---
+init();
+</script>
+</body>
+</html>
