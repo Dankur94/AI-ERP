@@ -9,6 +9,7 @@ __pycache__/
 .env.local
 .env.*.local
 config.yaml
+CLAUDE.local.md
 
 # IDE
 .vscode/
@@ -34,9 +35,12 @@ out/
 # Database (local data)
 *.db
 
-# Vault (user data)
-vault/
-.claude-context.md
+# Uploaded files (invoice PDFs etc.)
+src/api/storage/uploads/
+
+# Vault context files (not content)
+vault/.claude-context.md
+vault/.sub-context.md
 
 # Logs
 *.log
@@ -45,6 +49,7 @@ npm-debug.log*
 # Backups
 *.bak
 backups/
+.backups/
 
 # Coverage
 coverage/

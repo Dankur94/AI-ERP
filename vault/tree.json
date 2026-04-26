@@ -1,0 +1,575 @@
+{
+  "nodes": [
+    {
+      "id": "a0b1c2d3-e4f5-4a6b-7c8d-0f1a2b3c4d5e",
+      "title": "ZIEL — PDF rein, Daten raus",
+      "children": [
+        {
+          "id": "a8b9c0d1-e2f3-4a4b-5c6d-7e8f9a0b1c2d",
+          "title": "Lessons — Ranking nach Leitprinzip",
+          "children": []
+        },
+        {
+          "id": "9a9b0c1d-a2b3-4c4d-5e6f-7a8b9c0d1e20",
+          "title": "Validierung VOR dem Bauen",
+          "children": []
+        },
+        {
+          "id": "b1c2d3e4-f5a6-4b7c-8d9e-1a2b3c4d5e6f",
+          "title": "Woche 1 — PDF + Claude + JSON",
+          "children": [
+            {
+              "id": "1a1b2c3d-e4f5-4a6b-7c8d-9e0f1a2b3c40",
+              "title": "Claude Vision API — Technische Details",
+              "children": []
+            },
+            {
+              "id": "2a2b3c4d-f5a6-4b7c-8d9e-0f1a2b3c4d50",
+              "title": "Prompt Engineering fuer PDF-Extraktion",
+              "children": []
+            },
+            {
+              "id": "3a3b4c5d-a6b7-4c8d-9e0f-1a2b3c4d5e60",
+              "title": "PDF-Fallstricke & Qualitaetssicherung",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "c2d3e4f5-a6b7-4c8d-9e0f-2b3c4d5e6f7a",
+          "title": "Woche 2 — Upload-Seite",
+          "children": [
+            {
+              "id": "4a4b5c6d-b7c8-4d9e-0f1a-2b3c4d5e6f70",
+              "title": "Stack-Entscheidung — FastAPI vs Express",
+              "children": []
+            },
+            {
+              "id": "5a5b6c7d-c8d9-4e0f-1a2b-3c4d5e6f7a80",
+              "title": "UX-Minimum — Was der Nutzer wirklich braucht",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "d3e4f5a6-b7c8-4d9e-0f1a-3c4d5e6f7a8b",
+          "title": "Woche 3 — Ergebnisse in DB",
+          "children": [
+            {
+              "id": "6a6b7c8d-d9e0-4f1a-2b3c-4d5e6f7a8b90",
+              "title": "DB-Wahl — SQLite jetzt, Postgres spaeter",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "e4f5a6b7-c8d9-4e0f-1a2b-4d5e6f7a8b9c",
+          "title": "Woche 4 — Login & verkaufbar",
+          "children": [
+            {
+              "id": "7a7b8c9d-e0f1-4a2b-3c4d-5e6f7a8b9c00",
+              "title": "Auth-Strategie — Magic Link",
+              "children": []
+            },
+            {
+              "id": "8a8b9c0d-f1a2-4b3c-4d5e-6f7a8b9c0d10",
+              "title": "Pricing & Packaging",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "0b0c1d2e-b3c4-4d5e-6f7a-8b9c0d1e2f30",
+          "title": "Nach Woche 4 — Iterate oder Pivot",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "3f8a1b2c-d4e5-4f6a-b7c8-d9e0f1a2b3c4",
+      "title": "Schutzschichten — Qualitaet ohne Gedaechtnis",
+      "children": [
+        {
+          "id": "4a9b2c3d-e5f6-4a7b-8c9d-1e2f3a4b5c6d",
+          "title": "Schicht 1 — CLAUDE.md (vor dem Arbeiten)",
+          "children": []
+        },
+        {
+          "id": "8e3f6a7b-c9d0-4e1f-2a3b-5c6d7e8f9a0b",
+          "title": "Schicht 2 — Session-Handoff (zwischen Tagen)",
+          "children": []
+        },
+        {
+          "id": "b16c9d0e-f2a3-4b4c-5d6e-8f9a0b1c2d3e",
+          "title": "Schicht 3 — Automatische Checks (nach dem Arbeiten)",
+          "children": []
+        },
+        {
+          "id": "e49f2a3b-c5d6-4e7f-8a9b-1c2d3e4f5a6b",
+          "title": "Schicht 4 — Wartung (quartalsweise)",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "b7a1e2f3-c4d5-4e6f-a7b8-c9d0e1f2a3b4",
+      "title": "EU Regulatorik & Compliance-Wellen (2026-2030)",
+      "children": [
+        {
+          "id": "c8b2f3a4-d5e6-4f7a-b8c9-d0e1f2a3b4c5",
+          "title": "Welle 1 — Sofort-Bedarf (2026)",
+          "children": [
+            {
+              "id": "d9c3a4b5-e6f7-4a8b-c9d0-e1f2a3b4c5d6",
+              "title": "EU AI Act",
+              "children": []
+            },
+            {
+              "id": "e0d4b5c6-f7a8-4b9c-d0e1-f2a3b4c5d6e7",
+              "title": "EU Deforestation Regulation (EUDR)",
+              "children": []
+            },
+            {
+              "id": "f1e5c6d7-a8b9-4c0d-e1f2-a3b4c5d6e7f8",
+              "title": "Cyber Resilience Act (CRA)",
+              "children": []
+            },
+            {
+              "id": "a2f6d7e8-b9c0-4d1e-f2a3-b4c5d6e7f8a9",
+              "title": "E-Invoicing / ViDA",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "b3a7e8f9-c0d1-4e2f-a3b4-c5d6e7f8a9b0",
+          "title": "Welle 2 — Kurzfristig (2027)",
+          "children": [
+            {
+              "id": "c4b8f9a0-d1e2-4f3a-b4c5-d6e7f8a9b0c1",
+              "title": "Digital Product Passport (ESPR) + Battery Passport",
+              "children": []
+            },
+            {
+              "id": "d5c9a0b1-e2f3-4a4b-c5d6-e7f8a9b0c1d2",
+              "title": "UK CBAM + Internationale Mechanismen",
+              "children": []
+            },
+            {
+              "id": "e6d0b1c2-f3a4-4b5c-d6e7-f8a9b0c1d2e3",
+              "title": "AIFMD2 — Alternative Investmentfonds",
+              "children": []
+            },
+            {
+              "id": "f7e1c2d3-a4b5-4c6d-e7f8-a9b0c1d2e3f4",
+              "title": "PSD3 / PSR — Zahlungsverkehr",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "a8f2d3e4-b5c6-4d7e-f8a9-b0c1d2e3f4a5",
+          "title": "Welle 3 — Laufend & Verschaerfung (2026-2028+)",
+          "children": [
+            {
+              "id": "b9a3e4f5-c6d7-4e8f-a9b0-c1d2e3f4a5b6",
+              "title": "CSRD / CS3D — Nachhaltigkeitsberichterstattung",
+              "children": []
+            },
+            {
+              "id": "c0b4f5a6-d7e8-4f9a-b0c1-d2e3f4a5b6c7",
+              "title": "DORA — Finanzsektor Resilienz",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "d1c5a6b7-e8f9-4a0b-c1d2-e3f4a5b6c7d8",
+          "title": "Muster & Positionierung",
+          "children": [
+            {
+              "id": "e2d6b7c8-f9a0-4b1c-d2e3-f4a5b6c7d8e9",
+              "title": "Gemeinsame Compliance-Logik",
+              "children": []
+            },
+            {
+              "id": "f3e7c8d9-a0b1-4c2d-e3f4-a5b6c7d8e9f0",
+              "title": "Beratungswellen-Timing & Demand-Map",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0a1b2c3d-4e5f-4a6b-7c8d-9e0f1a2b3c4d",
+      "title": "Requirement Engineering",
+      "children": [
+        {
+          "id": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+          "title": "Bedienparadigmen (SAP/IBM)",
+          "children": [
+            {
+              "id": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+              "title": "Bedienparadigmen im Vergleich",
+              "children": []
+            },
+            {
+              "id": "7a8b9c0d-1e2f-4a3b-4c5d-6e7f8a9b0c1d",
+              "title": "Systemlogiken",
+              "children": []
+            },
+            {
+              "id": "2f3a4b5c-6d7e-4f8a-9b0c-1d2e3f4a5b6c",
+              "title": "Bewertungsdimensionen",
+              "children": []
+            },
+            {
+              "id": "7e8f9a0b-1c2d-4e3f-4a5b-6c7d8e9f0a1b",
+              "title": "Synthese & Designentscheidungen fuer AI ERP",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "a1b2c3d4-e5f6-4a7b-8c9d-f0e1a2b3c4d5",
+          "title": "OpenClaw Architektur",
+          "children": [
+            {
+              "id": "b2c3d4e5-f6a7-4b8c-9d0e-a1b2c3d4e5f6",
+              "title": "Grundprinzip & Hub-and-Spoke",
+              "children": []
+            },
+            {
+              "id": "f6a7b8c9-d0e1-4f2a-3b4c-e5f6a7b8c9d0",
+              "title": "Die fuenf Hauptebenen",
+              "children": []
+            },
+            {
+              "id": "d0e1f2a3-b4c5-4d6e-7f8a-c9d0e1f2a3b4",
+              "title": "Erweiterungsmechanismen",
+              "children": []
+            },
+            {
+              "id": "b4c5d6e7-f8a9-4b0c-1d2e-a3b4c5d6e7f8",
+              "title": "Implikationen fuer AI ERP",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "f8a9b0c1-d2e3-4f4a-5b6c-e7f8a9b0c1d2",
+          "title": "Historische Marktverdraenung — AI vs. Legacy",
+          "children": [
+            {
+              "id": "a9b0c1d2-e3f4-4a5b-6c7d-f8a9b0c1d2e3",
+              "title": "Fall 1: Salesforce vs. Siebel (2000-2010)",
+              "children": []
+            },
+            {
+              "id": "b0c1d2e3-f4a5-4b6c-7d8e-a9b0c1d2e3f4",
+              "title": "Fall 2: AWS vs. Rechenzentren (2006-2018)",
+              "children": []
+            },
+            {
+              "id": "c1d2e3f4-a5b6-4c7d-8e9f-b0c1d2e3f4a5",
+              "title": "Fall 3: Workday vs. SAP/Oracle HR (2006-heute)",
+              "children": []
+            },
+            {
+              "id": "d2e3f4a5-b6c7-4d8e-9f0a-c1d2e3f4a5b6",
+              "title": "Der rote Faden — Strategiemuster",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aa1b2c3d-e4f5-4a6b-7c8d-9e0f1a2b3c4d",
+      "title": "MVP Bauplan — Phasen-Leitfaden",
+      "children": [
+        {
+          "id": "bb2c3d4e-f5a6-4b7c-8d9e-0f1a2b3c4d5e",
+          "title": "Phase 0 — Desk Research (Woche 1)",
+          "children": []
+        },
+        {
+          "id": "cc3d4e5f-a6b7-4c8d-9e0f-1a2b3c4d5e6f",
+          "title": "Phase 1 — Requirements Engineering (Woche 2-3)",
+          "children": [
+            {
+              "id": "f1a2b3c4-d5e6-4f7a-8b9c-d0e1f2a3b4c5",
+              "title": "Vision",
+              "children": []
+            },
+            {
+              "id": "a2b3c4d5-e6f7-4a8b-9c0d-e1f2a3b4c5d6",
+              "title": "Personas",
+              "children": [
+                {
+                  "id": "b3c4d5e6-f7a8-4b9c-0d1e-f2a3b4c5d6e7",
+                  "title": "David Wong — Electronics Trading",
+                  "children": []
+                },
+                {
+                  "id": "c4d5e6f7-a8b9-4c0d-1e2f-a3b4c5d6e7f8",
+                  "title": "Michelle Lau — Fashion/Textiles",
+                  "children": []
+                },
+                {
+                  "id": "d5e6f7a8-b9c0-4d1e-2f3a-b4c5d6e7f8a9",
+                  "title": "Raymond Chan — F&B Import",
+                  "children": []
+                },
+                {
+                  "id": "e6f7a8b9-c0d1-4e2f-3a4b-c5d6e7f8a9b0",
+                  "title": "Restaurant — Platform & Influencer",
+                  "children": []
+                },
+                {
+                  "id": "f7a8b9c0-d1e2-4f3a-4b5c-d6e7f8a9b0c1",
+                  "title": "Healthcare — Praxis & Patientendaten",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "a3b4c5d6-e7f8-4a9b-0c1d-e2f3a4b5c6d7",
+              "title": "Jobs to Be Done (JTBD)",
+              "children": []
+            },
+            {
+              "id": "b4c5d6e7-f8a9-4b0c-1d2e-f3a4b5c6d7e8",
+              "title": "Journey Maps",
+              "children": []
+            },
+            {
+              "id": "c5d6e7f8-a9b0-4c1d-2e3f-a4b5c6d7e8f9",
+              "title": "User Stories",
+              "children": []
+            },
+            {
+              "id": "d6e7f8a9-b0c1-4d2e-3f4a-b5c6d7e8f9a0",
+              "title": "MoSCoW-Priorisierung",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "dd4e5f6a-b7c8-4d9e-0f1a-2b3c4d5e6f7a",
+          "title": "Phase 2 — Architektur-Entscheidungen (Woche 4)",
+          "children": [
+            {
+              "id": "c9f1a2b3-d4e5-4f6a-b7c8-e9d0f1a2b3c4",
+              "title": "Odoo — Architektur-Lessons",
+              "children": []
+            },
+            {
+              "id": "d0a2b3c4-e5f6-4a7b-8c9d-f0e1a2b3c4d5",
+              "title": "Stripe — Architektur-Lessons",
+              "children": []
+            },
+            {
+              "id": "e1b3c4d5-f6a7-4b8c-9d0e-a1f2b3c4d5e6",
+              "title": "OpenClaw — Architektur-Lessons",
+              "children": []
+            },
+            {
+              "id": "f2c4d5e6-a7b8-4c9d-0e1f-b2a3c4d5e6f7",
+              "title": "Shopify — Architektur-Lessons",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "ee5f6a7b-c8d9-4e0f-1a2b-3c4d5e6f7a8b",
+          "title": "Phase 3 — Fundament bauen (Woche 5-6)",
+          "children": []
+        },
+        {
+          "id": "ff6a7b8c-d9e0-4f1a-2b3c-4d5e6f7a8b9c",
+          "title": "Phase 4 — Domain-Kern (Woche 7-10)",
+          "children": []
+        },
+        {
+          "id": "aa7b8c9d-e0f1-4a2b-3c4d-5e6f7a8b9c0d",
+          "title": "Phase 5 — LLM-Integration (Woche 8-10)",
+          "children": []
+        },
+        {
+          "id": "bb8c9d0e-f1a2-4b3c-4d5e-6f7a8b9c0d1e",
+          "title": "Phase 6 — Benutzeroberflaeche (Woche 11-13)",
+          "children": []
+        },
+        {
+          "id": "cc9d0e1f-a2b3-4c4d-5e6f-7a8b9c0d1e2f",
+          "title": "Phase 7 — Integrationen (Woche 14-15)",
+          "children": []
+        },
+        {
+          "id": "dd0e1f2a-b3c4-4d5e-6f7a-8b9c0d1e2f3a",
+          "title": "Phase 8 — Production-Readiness (Woche 16-17)",
+          "children": []
+        },
+        {
+          "id": "ee1f2a3b-c4d5-4e6f-7a8b-9c0d1e2f3a4b",
+          "title": "Phase 9 — Pilotkunde (ab Woche 18)",
+          "children": []
+        },
+        {
+          "id": "ff2a3b4c-d5e6-4f7a-8b9c-0d1e2f3a4b5c",
+          "title": "Begleit-Prinzipien",
+          "children": [
+            {
+              "id": "aa3b4c5d-e6f7-4a8b-9c0d-1e2f3a4b5c6d",
+              "title": "Geschwindigkeit vs. Qualitaet",
+              "children": []
+            },
+            {
+              "id": "bb4c5d6e-f7a8-4b9c-0d1e-2f3a4b5c6d7e",
+              "title": "Meta-Ebene & Dokumentation",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "cc5d6e7f-a8b9-4c0d-1e2f-3a4b5c6d7e8f",
+          "title": "Zeitplan & Kern-Logik",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "a1c2d3e4-f5a6-4b7c-8d9e-1a2b3c4d5e6f",
+      "title": "Design-Philosophien & Methoden",
+      "children": [
+        {
+          "id": "b2d3e4f5-a6b7-4c8d-9e0f-2b3c4d5e6f7a",
+          "title": "Domain-Driven Design (DDD) — Ueberblick",
+          "children": []
+        },
+        {
+          "id": "c3e4f5a6-b7c8-4d9e-0f1a-3c4d5e6f7a8b",
+          "title": "Strategisches Design",
+          "children": []
+        },
+        {
+          "id": "d4f5a6b7-c8d9-4e0f-1a2b-4d5e6f7a8b9c",
+          "title": "Taktisches Design",
+          "children": []
+        },
+        {
+          "id": "e5a6b7c8-d9e0-4f1a-2b3c-5e6f7a8b9c0d",
+          "title": "Event Bus & Domain Events",
+          "children": []
+        },
+        {
+          "id": "f6b7c8d9-e0f1-4a2b-3c4d-6f7a8b9c0d1e",
+          "title": "DDD im AI-ERP-Kontext",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "d4a1b2c3-e5f6-4a7b-8c9d-0e1f2a3b4c5e",
+      "title": "Beratungsmodell — Architekt, nicht Handwerker",
+      "children": [
+        {
+          "id": "e5b2c3d4-f6a7-4b8c-9d0e-1f2a3b4c5d6f",
+          "title": "Prozess-Analyse — Die 20/80 vor Ort",
+          "children": []
+        },
+        {
+          "id": "f6c3d4e5-a7b8-4c9d-0e1f-2a3b4c5d6e7a",
+          "title": "System-Architektur — 1 System statt 5 Inseln",
+          "children": []
+        },
+        {
+          "id": "a7d4e5f6-b8c9-4d0e-1f2a-3b4c5d6e7f8b",
+          "title": "Build-Begleitung — Mit Claude steuern",
+          "children": []
+        },
+        {
+          "id": "b8e5f6a7-c9d0-4e1f-2a3b-4c5d6e7f8a9c",
+          "title": "Ops & Maintenance — Retainer",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "a4b5c6d7-e8f9-4a0b-1c2d-3e4f5a6b7c8d",
+      "title": "AHK Outreach — Mitglieder-Scoring",
+      "children": []
+    },
+    {
+      "id": "01a4f794-7c7d-43df-9495-e565720f0169",
+      "title": "Projektideen",
+      "children": [
+        {
+          "id": "20d5733c-1f3d-4ea6-92eb-84469034e2f8",
+          "title": "Gundam Kids 3D — Zeichnen & Drucken",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
+      "title": "Software — Das Produkt",
+      "children": [
+        {
+          "id": "e9f0a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3b",
+          "title": "Master-MD — Claude Briefing",
+          "children": []
+        },
+        {
+          "id": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
+          "title": "Tech Stack",
+          "children": []
+        },
+        {
+          "id": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
+          "title": "Modul 1 — Dokumenten-Erfassung",
+          "children": [
+            {
+              "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5e",
+              "title": "PDF-Extraktion & OCR — Grundlagen und Optionen",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
+          "title": "Modul 2 — Suche & Index",
+          "children": []
+        },
+        {
+          "id": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d",
+          "title": "Modul 3 — Matching",
+          "children": []
+        },
+        {
+          "id": "b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e",
+          "title": "Modul 4 — Reports",
+          "children": []
+        },
+        {
+          "id": "c7d8e9f0-a1b2-4c3d-4e5f-6a7b8c9d0e1f",
+          "title": "Modul 5 — Alerts",
+          "children": []
+        },
+        {
+          "id": "d8e9f0a1-b2c3-4d4e-5f6a-7b8c9d0e1f2a",
+          "title": "Modul 6 — Dashboard",
+          "children": [
+            {
+              "id": "f9a0b1c2-d3e4-4f5a-6b7c-8d9e0f1a2b3c",
+              "title": "UX-Grundlagen — Gehirn, Auge, Hand",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
