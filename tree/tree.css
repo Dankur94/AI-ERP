@@ -96,6 +96,35 @@ body {
   border-color: var(--accent);
 }
 
+#tree-selector {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 11px;
+  height: 24px;
+  padding: 0 4px;
+  margin-left: 6px;
+  max-width: 120px;
+  outline: none;
+  cursor: pointer;
+}
+
+#tree-selector:hover,
+#tree-selector:focus {
+  border-color: var(--accent);
+}
+
+#tree-selector option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+#btn-add-tree {
+  margin-left: 2px;
+  font-size: 14px !important;
+}
+
 .toolbar-spacer {
   flex: 1;
 }
@@ -168,6 +197,15 @@ body {
   font-size: 11px;
   margin-right: 6px;
   flex-shrink: 0;
+}
+
+.highlight-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffc125;
+  flex-shrink: 0;
+  margin-right: 5px;
 }
 
 .node-title {

@@ -4,15 +4,99 @@ let selectedId = null;
 let focusedId = null;
 let collapsedSet = new Set();
 let contextNodeIds = new Set(); // nodes in current context (from marks)
+let highlightedNodeIds = new Set(); // nodes with textmarker highlights
 
 const container = document.getElementById('tree-container');
 const contextMenu = document.getElementById('context-menu');
+const treeSelector = document.getElementById('tree-selector');
 
 // --- Init ---
 async function init() {
+  await populateTreeSelector();
   treeData = await window.api.getTree();
   render();
 }
+
+// --- Tree Selector ---
+async function populateTreeSelector() {
+  const trees = await window.api.getTrees();
+  const activeId = await window.api.getActiveTree();
+  treeSelector.innerHTML = '';
+  for (const t of trees) {
+    const opt = document.createElement('option');
+    opt.value = t.id;
+    opt.textContent = t.label;
+    if (t.id === activeId) opt.selected = true;
+    treeSelector.appendChild(opt);
+  }
+}
+
+treeSelector.addEventListener('change', async () => {
+  await window.api.switchTree(treeSelector.value);
+});
+
+document.getElementById('btn-add-tree').addEventListener('click', async () => {
+  const label = prompt('Name for new tree:');
+  if (!label || !label.trim()) return;
+  const result = await window.api.createTree(label.trim());
+  if (result) {
+    await populateTreeSelector();
+    await window.api.switchTree(result.id);
+  }
+});
+
+// Right-click on tree selector → rename/delete
+treeSelector.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  const activeId = treeSelector.value;
+  const items = [
+    { label: 'Rename Tree', action: () => renameCurrentTree(activeId) },
+    { label: 'Delete Tree', action: () => deleteCurrentTree(activeId), disabled: treeSelector.options.length <= 1 },
+  ];
+  contextMenu.innerHTML = '';
+  items.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'context-menu-item' + (item.disabled ? ' disabled' : '');
+    el.textContent = item.label;
+    if (!item.disabled) {
+      el.addEventListener('click', () => { hideContextMenu(); item.action(); });
+    }
+    contextMenu.appendChild(el);
+  });
+  contextMenu.classList.remove('hidden');
+  contextMenu.style.left = Math.min(e.clientX, window.innerWidth - 170) + 'px';
+  contextMenu.style.top = Math.min(e.clientY, window.innerHeight - items.length * 30 - 10) + 'px';
+});
+
+async function renameCurrentTree(id) {
+  const current = [...treeSelector.options].find(o => o.value === id);
+  const newLabel = prompt('Rename tree:', current ? current.textContent : '');
+  if (!newLabel || !newLabel.trim()) return;
+  await window.api.renameTree(id, newLabel.trim());
+  await populateTreeSelector();
+}
+
+async function deleteCurrentTree(id) {
+  if (!confirm('Delete this tree and all its nodes?')) return;
+  // Switch to another tree first
+  const otherOpt = [...treeSelector.options].find(o => o.value !== id);
+  if (!otherOpt) return;
+  await window.api.switchTree(otherOpt.value);
+  await window.api.deleteTree(id);
+  await populateTreeSelector();
+}
+
+// --- Tree switched event ---
+window.api.onTreeSwitched(async () => {
+  selectedId = null;
+  focusedId = null;
+  collapsedSet.clear();
+  contextNodeIds.clear();
+  highlightedNodeIds.clear();
+  treeData = await window.api.getTree();
+  await populateTreeSelector();
+  render();
+});
 
 // --- UUID ---
 function uuid() {
@@ -120,6 +204,14 @@ function renderNodes(nodes, parentEl, prefix) {
 
     row.appendChild(chevron);
     row.appendChild(numSpan);
+
+    // Yellow dot for nodes with textmarker highlights
+    if (highlightedNodeIds.has(node.id)) {
+      const dot = document.createElement('span');
+      dot.className = 'highlight-dot';
+      row.appendChild(dot);
+    }
+
     row.appendChild(titleSpan);
 
     // Click → select + open in viewer
@@ -332,6 +424,12 @@ document.addEventListener('keydown', (e) => {
 // --- Marks highlight from main process ---
 window.api.onMarksUpdated((state) => {
   contextNodeIds = new Set(state.markedNodeIds || []);
+  render();
+});
+
+// --- Highlight dots from main process ---
+window.api.onHighlightedNodesUpdated((ids) => {
+  highlightedNodeIds = new Set(ids || []);
   render();
 });
 

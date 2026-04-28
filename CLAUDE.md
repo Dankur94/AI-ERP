@@ -1,108 +1,80 @@
-﻿# AI ERP
+# AI ERP
 
-## Projektbeschreibung
-TODO: Beschreibung hier einfuegen
+## WICHTIG — Vor jeder Arbeit lesen
 
-## Ziel
-TODO: Was soll erreicht werden?
+Lies diese Datei KOMPLETT bevor du antwortest oder Code schreibst.
+Lies danach: @vault/trees/main/nodes/e9f0a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3b.md (Master-Briefing)
+Lies danach: CHANGELOG.md (Was ist gebaut)
+Lies danach: docs/sessions/ (neueste Datei — was wurde zuletzt gemacht)
 
-## Tech Stack
-TODO: Welche Technologien?
+## Produkt
 
-## Deployment
-- **VM:** ``
-- **SSH:** `ssh -i  `
-- **Pfad auf VM:** `/`
+**Dokument rein → extrahieren → abgleichen → reporten → warnen. Eine Pipeline, ein Tool, fuer kleine Firmen (5-15 Leute) in HK.**
+Kein Wettbewerber hat die volle Pipeline fuer KMU. Wir schliessen diese Luecke.
 
+## Leitprinzip
 
-## Deploy-Workflow (Git-based)
-```bash
-# Lokal editieren, committen, dann:
-bash deploy.sh
-```
-Das Script macht automatisch: git push -> VM pullt von GitHub -> Service restart -> Health-Check.
-
-**Rollback:** `ssh -i   'cd / && git reset --hard HEAD~1'`
-
-WICHTIG: config.yaml ist in .gitignore ??lebt NUR auf der VM mit echten Credentials. Lokal nur config.example.yaml.
+Heute fuer Stufe 1 (Custom) bauen. Nicht fuer Stufe 3-4.
+Pflicht: L1 (kein Fork), L2 (geteiltes Datenmodell), L3 (Isolation), L4 (progressiv).
+Verboten: L6 (API-Version), L9 (Sandbox), L11 (Queues), L15 (4-Layer-Memory).
 
 ## Struktur
+
 ```
 AI ERP/
-+-- CLAUDE.md              # Projektkontext fuer Claude
-+-- CHANGELOG.md           # Versionshistorie
-+-- config.example.yaml    # Config-Template (NICHT config.yaml committen!)
-+-- deploy.sh              # Deploy-Script (git push + VM pull + health-check)
-+-- .gitignore             # Git-Ausschluesse
-+-- src/                   # Quellcode
-+-- docs/                  # Dokumentation
-|   +-- adding-modules.md  # Anleitung: Neue Module erstellen
-+-- tests/                 # Tests
-+-- modules/               # Self-contained Module
+├── CLAUDE.md           ← Diese Datei
+├── CHANGELOG.md        ← Was ist gebaut
+├── vault/              ← Wissen (Tree + Viewer, NICHT Software)
+├── src/                ← Software (das Produkt)
+│   ├── api/            ← Backend
+│   ├── web/            ← Frontend
+│   └── shared/         ← Geteilte Typen
+├── docs/
+│   ├── domain/         ← Fachwissen (@-Referenz)
+│   └── sessions/       ← Session-Handoffs
+└── tests/              ← Tests
 ```
 
-## Architektur-Entscheidungen
-- Jedes Modul ist self-contained in modules/<name>/
-- Module werden ueber eine zentrale Registry verwaltet
-- config.yaml ist umgebungs-spezifisch (nicht im Repo)
-- config.example.yaml ist das Template (im Repo)
+## Code-Konventionen
 
-## Modul-Registry
-Module registrieren sich in ihrer eigenen index-Datei und werden vom Hauptprojekt importiert.
-Jedes Modul enthaelt: eigenen Code, eigene Tests, eigene Docs.
-
-## Deploy-Checkliste (jedes neue Feature)
-1. [ ] Code geschrieben + getestet
-2. [ ] CHANGELOG.md [Unreleased] aktualisiert
-3. [ ] `bash deploy.sh` ausfuehren
-4. [ ] Health-Check bestanden?
-
-## Git-Workflow
-- main: Stabiler, deploybarer Stand
-- Commit direkt auf main fuer kleine Aenderungen
-- Feature-Branches fuer groessere Aenderungen
+- Python mit Type Hints (strict)
+- Keine print() in Production
+- Jede Funktion braucht Type Hints
+- Keine Secrets im Code
+- Commit: feat: / fix: / refactor:
 
 ## LeanHierarchy — Vault-System
 
-Du bist der Haupt-Editor fuer alle Inhalte in `vault/`. Der Benutzer sagt dir was er braucht, du erstellst und bearbeitest Struktur + Inhalte.
+Du bist der Haupt-Editor fuer alle Inhalte in `vault/`.
 
 ### Dateien
-- `vault/tree.json` — Hierarchie-Struktur (du bearbeitest diese direkt)
-- `vault/nodes/<uuid>.md` — Markdown-Inhalt pro Knoten (du erstellst/bearbeitest diese)
-- `vault/.claude-context.md` — Aktuelle Markierungen des Benutzers (lies diese vor jeder Aufgabe!)
-
-### tree.json Format
-```json
-{
-  "nodes": [
-    {
-      "id": "uuid-v4",
-      "title": "Knoten-Titel",
-      "children": [
-        { "id": "uuid-v4", "title": "Kind-Knoten", "children": [] }
-      ]
-    }
-  ]
-}
-```
+- `vault/trees.json` — Registry: aktiver Tree + Liste aller Trees
+- `vault/trees/<tree-id>/tree.json` — Hierarchie-Struktur pro Tree
+- `vault/trees/<tree-id>/nodes/<uuid>.md` — Markdown-Inhalt pro Knoten
+- `vault/.claude-context.md` — Markierungen des Benutzers (lies vor jeder Aufgabe!)
 
 ### Regeln
-1. **IDs**: Immer UUID v4 generieren (z.B. `a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d`)
-2. **Max 4 Ebenen**: nodes → children → children → children (nicht tiefer)
-3. **Jeder Knoten braucht eine .md-Datei**: Nach Anlegen eines Knotens in tree.json auch `vault/nodes/<id>.md` erstellen
-4. **Beim Loeschen**: Knoten aus tree.json entfernen UND die zugehoerige .md-Datei loeschen
-5. **Die App refresht automatisch**: Aenderungen an vault/ werden sofort in Tree und Viewer angezeigt
+1. IDs: Immer UUID v4
+2. Max 4 Ebenen
+3. Jeder Knoten braucht eine .md-Datei
+4. Beim Loeschen: tree.json UND .md-Datei
+5. App refresht automatisch
+6. Mehrere Trees moeglich — jeder hat eigene nodes/ und .highlights.json
 
-### Workflow
-- Benutzer sagt: "Erstelle einen Bereich Authentication mit OAuth und JWT"
-- Du bearbeitest `vault/tree.json` und erstellst die `.md`-Dateien
-- Benutzer markiert Woerter im Viewer → Kontext erscheint in `vault/.claude-context.md`
-- Du liest die Kontext-Datei und weisst genau was bearbeitet werden soll
+## Session-Ende Pflicht
 
-### Sub-Claude
-Funktion `sub` im PowerShell-Fenster oeffnet ein weiteres Claude-Fenster fuer Detailfragen
+Am Ende jeder Session → `docs/sessions/YYYY-MM-DD.md`:
+Was gemacht, offene Entscheidungen, naechste Schritte.
 
-## Notizen
-- Erstellt am: 2026-04-22 21:49
-- Status: Neu
-- Version: v1.0.0
+## Deploy
+
+```bash
+bash deploy.sh
+```
+config.yaml lebt NUR auf der VM. Lokal nur config.example.yaml.
+
+## Git-Workflow
+
+- main: Stabiler Stand
+- Commit direkt auf main fuer kleine Aenderungen
+- Feature-Branches fuer groessere Aenderungen

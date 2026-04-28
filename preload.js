@@ -25,9 +25,26 @@ contextBridge.exposeInMainWorld('api', {
   clearAllMarks: () => ipcRenderer.invoke('marks:clearAll'),
   getMarksForNode: (nodeId) => ipcRenderer.invoke('marks:getForNode', nodeId),
 
+  // Highlights (Textmarker)
+  setHighlightsForNode: (nodeId, indices) => ipcRenderer.invoke('highlights:setForNode', nodeId, indices),
+  getHighlightsForNode: (nodeId) => ipcRenderer.invoke('highlights:getForNode', nodeId),
+  clearHighlightsInNode: (nodeId) => ipcRenderer.invoke('highlights:clearAllInNode', nodeId),
+
   // Marks events
   onMarksUpdated: (cb) => ipcRenderer.on('marks:updated', (_e, state) => cb(state)),
   onContextCopied: (cb) => ipcRenderer.on('context:copied', () => cb()),
+
+  // Highlight indicators (nodes with textmarker highlights)
+  onHighlightedNodesUpdated: (cb) => ipcRenderer.on('highlights:nodesUpdated', (_e, ids) => cb(ids)),
+
+  // Multi-tree
+  getTrees: () => ipcRenderer.invoke('vault:getTrees'),
+  getActiveTree: () => ipcRenderer.invoke('vault:getActiveTree'),
+  switchTree: (id) => ipcRenderer.invoke('vault:switchTree', id),
+  createTree: (label) => ipcRenderer.invoke('vault:createTree', label),
+  deleteTree: (id) => ipcRenderer.invoke('vault:deleteTree', id),
+  renameTree: (id, label) => ipcRenderer.invoke('vault:renameTree', id, label),
+  onTreeSwitched: (cb) => ipcRenderer.on('vault:treeSwitched', (_e, id) => cb(id)),
 
   // File watcher refresh
   onVaultRefresh: (cb) => ipcRenderer.on('vault:refresh', () => cb()),
