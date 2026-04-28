@@ -10,6 +10,40 @@ const container = document.getElementById('tree-container');
 const contextMenu = document.getElementById('context-menu');
 const treeSelector = document.getElementById('tree-selector');
 
+// --- Custom input dialog (prompt() doesn't work in Electron) ---
+function showInputDialog(title, defaultValue = '') {
+  return new Promise((resolve) => {
+    const dialog = document.getElementById('input-dialog');
+    const input = document.getElementById('input-dialog-input');
+    const titleEl = document.getElementById('input-dialog-title');
+    const okBtn = document.getElementById('input-dialog-ok');
+    const cancelBtn = document.getElementById('input-dialog-cancel');
+
+    titleEl.textContent = title;
+    input.value = defaultValue;
+    dialog.classList.remove('hidden');
+    input.focus();
+    input.select();
+
+    function cleanup() {
+      dialog.classList.add('hidden');
+      input.removeEventListener('keydown', onKey);
+      okBtn.removeEventListener('click', onOk);
+      cancelBtn.removeEventListener('click', onCancel);
+    }
+    function onOk() { cleanup(); resolve(input.value); }
+    function onCancel() { cleanup(); resolve(null); }
+    function onKey(e) {
+      if (e.key === 'Enter') onOk();
+      if (e.key === 'Escape') onCancel();
+    }
+
+    input.addEventListener('keydown', onKey);
+    okBtn.addEventListener('click', onOk);
+    cancelBtn.addEventListener('click', onCancel);
+  });
+}
+
 // --- Init ---
 async function init() {
   await populateTreeSelector();
@@ -36,7 +70,7 @@ treeSelector.addEventListener('change', async () => {
 });
 
 document.getElementById('btn-add-tree').addEventListener('click', async () => {
-  const label = prompt('Name for new tree:');
+  const label = await showInputDialog('Name for new tree:');
   if (!label || !label.trim()) return;
   const result = await window.api.createTree(label.trim());
   if (result) {
@@ -45,9 +79,8 @@ document.getElementById('btn-add-tree').addEventListener('click', async () => {
   }
 });
 
-// Right-click on tree selector → rename/delete
-treeSelector.addEventListener('contextmenu', (e) => {
-  e.preventDefault();
+// Tree menu button (rename/delete) — replaces right-click on select which doesn't work on Windows
+function showTreeMenu(x, y) {
   const activeId = treeSelector.value;
   const items = [
     { label: 'Rename Tree', action: () => renameCurrentTree(activeId) },
@@ -64,26 +97,89 @@ treeSelector.addEventListener('contextmenu', (e) => {
     contextMenu.appendChild(el);
   });
   contextMenu.classList.remove('hidden');
-  contextMenu.style.left = Math.min(e.clientX, window.innerWidth - 170) + 'px';
-  contextMenu.style.top = Math.min(e.clientY, window.innerHeight - items.length * 30 - 10) + 'px';
+  contextMenu.style.left = Math.min(x, window.innerWidth - 170) + 'px';
+  contextMenu.style.top = Math.min(y, window.innerHeight - items.length * 30 - 10) + 'px';
+}
+
+document.getElementById('btn-tree-menu').addEventListener('click', (e) => {
+  e.stopPropagation();
+  const rect = e.target.getBoundingClientRect();
+  showTreeMenu(rect.left, rect.bottom + 2);
+});
+
+treeSelector.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  showTreeMenu(e.clientX, e.clientY);
 });
 
 async function renameCurrentTree(id) {
   const current = [...treeSelector.options].find(o => o.value === id);
-  const newLabel = prompt('Rename tree:', current ? current.textContent : '');
+  const newLabel = await showInputDialog('Rename tree:', current ? current.textContent : '');
   if (!newLabel || !newLabel.trim()) return;
   await window.api.renameTree(id, newLabel.trim());
   await populateTreeSelector();
 }
 
 async function deleteCurrentTree(id) {
-  if (!confirm('Delete this tree and all its nodes?')) return;
-  // Switch to another tree first
+  const current = [...treeSelector.options].find(o => o.value === id);
+  if (!current) return;
   const otherOpt = [...treeSelector.options].find(o => o.value !== id);
   if (!otherOpt) return;
+
+  const treeName = current.textContent;
+  const confirmed = await showDeleteConfirmDialog(treeName);
+  if (!confirmed) return;
+
   await window.api.switchTree(otherOpt.value);
   await window.api.deleteTree(id);
   await populateTreeSelector();
+}
+
+function showDeleteConfirmDialog(treeName) {
+  return new Promise((resolve) => {
+    const dialog = document.getElementById('delete-dialog');
+    const input = document.getElementById('delete-dialog-input');
+    const nameEl = document.getElementById('delete-dialog-name');
+    const infoEl = document.getElementById('delete-dialog-info');
+    const confirmBtn = document.getElementById('delete-dialog-confirm');
+    const cancelBtn = document.getElementById('delete-dialog-cancel');
+
+    nameEl.textContent = treeName;
+    input.value = '';
+    confirmBtn.disabled = true;
+    infoEl.textContent = '';
+    dialog.classList.remove('hidden');
+    input.focus();
+
+    function checkMatch() {
+      const match = input.value === treeName;
+      confirmBtn.disabled = !match;
+      if (input.value.length > 0 && !match) {
+        infoEl.textContent = 'Name stimmt nicht ueberein';
+      } else {
+        infoEl.textContent = '';
+      }
+    }
+
+    function cleanup() {
+      dialog.classList.add('hidden');
+      input.removeEventListener('input', checkMatch);
+      input.removeEventListener('keydown', onKey);
+      confirmBtn.removeEventListener('click', onConfirm);
+      cancelBtn.removeEventListener('click', onCancel);
+    }
+    function onConfirm() { if (!confirmBtn.disabled) { cleanup(); resolve(true); } }
+    function onCancel() { cleanup(); resolve(false); }
+    function onKey(e) {
+      if (e.key === 'Enter' && !confirmBtn.disabled) onConfirm();
+      if (e.key === 'Escape') onCancel();
+    }
+
+    input.addEventListener('input', checkMatch);
+    input.addEventListener('keydown', onKey);
+    confirmBtn.addEventListener('click', onConfirm);
+    cancelBtn.addEventListener('click', onCancel);
+  });
 }
 
 // --- Tree switched event ---

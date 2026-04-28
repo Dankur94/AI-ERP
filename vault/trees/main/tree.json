@@ -503,6 +503,16 @@
       "children": []
     },
     {
+      "id": "198cb671-cc54-42f1-945e-707e3b4deec6",
+      "title": "Einkaufsliste — Outreach-Vorbereitung",
+      "children": []
+    },
+    {
+      "id": "2f7c6f7a-1b3e-477b-b7c9-ac90e7c6d209",
+      "title": "Erfolgsrezepte",
+      "children": []
+    },
+    {
       "id": "01a4f794-7c7d-43df-9495-e565720f0169",
       "title": "Projektideen",
       "children": [
@@ -565,6 +575,11 @@
             {
               "id": "f9a0b1c2-d3e4-4f5a-6b7c-8d9e0f1a2b3c",
               "title": "UX-Grundlagen — Gehirn, Auge, Hand",
+              "children": []
+            },
+            {
+              "id": "ef2806c1-d3d8-4687-8c35-8ddaf325fd5a",
+              "title": "Dashboard-Idee — AI-generiertes Layout per Sprache/Text",
               "children": []
             }
           ]

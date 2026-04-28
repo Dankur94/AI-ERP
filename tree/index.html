@@ -16,6 +16,7 @@
   <div class="toolbar">
     <button id="btn-add-root" title="Add top-level node">+</button>
     <select id="tree-selector" title="Switch Tree"></select>
+    <button id="btn-tree-menu" title="Rename / Delete Tree">&#x22EF;</button>
     <button id="btn-add-tree" title="New Tree">&#x2295;</button>
     <div class="toolbar-spacer"></div>
     <button id="btn-sub-claude" class="toolbar-claude" title="Sub-Claude: Fragen zu Inhalten stellen">sub</button>
@@ -23,6 +24,31 @@
   </div>
   <div id="tree-container"></div>
   <div id="context-menu" class="context-menu hidden"></div>
+  <div id="input-dialog" class="input-dialog hidden">
+    <div class="input-dialog-backdrop"></div>
+    <div class="input-dialog-box">
+      <div class="input-dialog-title" id="input-dialog-title"></div>
+      <input type="text" class="input-dialog-input" id="input-dialog-input" />
+      <div class="input-dialog-buttons">
+        <button id="input-dialog-cancel">Cancel</button>
+        <button id="input-dialog-ok">OK</button>
+      </div>
+    </div>
+  </div>
+  <div id="delete-dialog" class="delete-dialog hidden">
+    <div class="delete-dialog-backdrop"></div>
+    <div class="delete-dialog-box">
+      <div class="delete-dialog-title">Tree loeschen</div>
+      <div class="delete-dialog-warning">Diese Aktion verschiebt den Tree in den Papierkorb.</div>
+      <div class="delete-dialog-prompt">Tippe <strong id="delete-dialog-name"></strong> ein um zu bestaetigen:</div>
+      <input type="text" class="delete-dialog-input" id="delete-dialog-input" autocomplete="off" spellcheck="false" />
+      <div class="delete-dialog-info" id="delete-dialog-info"></div>
+      <div class="delete-dialog-buttons">
+        <button id="delete-dialog-cancel">Cancel</button>
+        <button id="delete-dialog-confirm" class="delete-btn" disabled>Delete</button>
+      </div>
+    </div>
+  </div>
   <script src="tree.js"></script>
 </body>
 </html>

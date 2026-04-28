@@ -171,6 +171,56 @@ body {
   background: rgba(127, 109, 242, 0.5);
 }
 
+/* Normal highlight (yellow) */
+.word.highlighted {
+  background: rgba(255, 193, 37, 0.35);
+}
+
+.word.highlighted:hover {
+  background: rgba(255, 193, 37, 0.55);
+}
+
+.word.marked.highlighted {
+  background: linear-gradient(to bottom, rgba(127, 109, 242, 0.35) 50%, rgba(255, 193, 37, 0.35) 50%);
+}
+
+.word.marked.highlighted:hover {
+  background: linear-gradient(to bottom, rgba(127, 109, 242, 0.5) 50%, rgba(255, 193, 37, 0.55) 50%);
+}
+
+/* Heading highlight (yellow + underline) */
+.word.hl-heading {
+  background: rgba(255, 193, 37, 0.35);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 193, 37, 0.8);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.word.hl-heading:hover {
+  background: rgba(255, 193, 37, 0.55);
+}
+
+.word.marked.hl-heading {
+  background: linear-gradient(to bottom, rgba(127, 109, 242, 0.35) 50%, rgba(255, 193, 37, 0.35) 50%);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 193, 37, 0.8);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.word.marked.hl-heading:hover {
+  background: linear-gradient(to bottom, rgba(127, 109, 242, 0.5) 50%, rgba(255, 193, 37, 0.55) 50%);
+}
+
+#node-content.tm-dragging {
+  cursor: crosshair;
+}
+
+#node-content.tm-dragging .word {
+  cursor: crosshair;
+}
+
 .word.branch-match {
   border-bottom: 2px solid var(--accent);
 }

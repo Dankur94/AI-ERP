@@ -120,6 +120,12 @@ body {
   color: var(--text-primary);
 }
 
+#btn-tree-menu {
+  margin-left: 2px;
+  font-size: 14px !important;
+  letter-spacing: -1px;
+}
+
 #btn-add-tree {
   margin-left: 2px;
   font-size: 14px !important;
@@ -279,6 +285,146 @@ body {
 
 .context-menu-item.disabled:hover {
   background: none;
+}
+
+/* Input Dialog */
+.input-dialog.hidden { display: none; }
+.input-dialog-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+}
+.input-dialog-box {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  min-width: 260px;
+  z-index: 2001;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+.input-dialog-title {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.input-dialog-input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 3px;
+  outline: none;
+}
+.input-dialog-input:focus { border-color: var(--accent); }
+.input-dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+.input-dialog-buttons button {
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.input-dialog-buttons button:hover { background: var(--accent); border-color: var(--accent); }
+
+/* Delete Confirmation Dialog */
+.delete-dialog.hidden { display: none; }
+.delete-dialog-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 3000;
+}
+.delete-dialog-box {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-secondary);
+  border: 1px solid #cc3333;
+  border-radius: 6px;
+  padding: 20px;
+  min-width: 300px;
+  max-width: 360px;
+  z-index: 3001;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+.delete-dialog-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff5555;
+  margin-bottom: 8px;
+}
+.delete-dialog-warning {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.delete-dialog-prompt {
+  font-size: 12px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.delete-dialog-prompt strong {
+  color: #ff5555;
+}
+.delete-dialog-input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 3px;
+  outline: none;
+}
+.delete-dialog-input:focus { border-color: #ff5555; }
+.delete-dialog-info {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  min-height: 14px;
+}
+.delete-dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+.delete-dialog-buttons button {
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.delete-dialog-buttons button:hover { background: var(--bg-primary); }
+.delete-btn {
+  background: #441111 !important;
+  border-color: #cc3333 !important;
+  color: #ff5555 !important;
+}
+.delete-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed !important;
+}
+.delete-btn:not(:disabled):hover {
+  background: #cc3333 !important;
+  color: #fff !important;
 }
 
 /* Scrollbar */

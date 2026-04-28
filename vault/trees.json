@@ -1,0 +1,17 @@
+{
+  "active": "creatorport",
+  "trees": [
+    {
+      "id": "main",
+      "label": "AI ERP"
+    },
+    {
+      "id": "creatorport",
+      "label": "Creatorport"
+    },
+    {
+      "id": "sop",
+      "label": "SOP"
+    }
+  ]
+}

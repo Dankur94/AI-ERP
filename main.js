@@ -7,6 +7,7 @@ const { exec, spawn } = require('child_process');
 const VAULT_DIR = path.join(__dirname, 'vault');
 const TREES_DIR = path.join(VAULT_DIR, 'trees');
 const TREES_REGISTRY = path.join(VAULT_DIR, 'trees.json');
+const TRASH_DIR = path.join(VAULT_DIR, '.trash');
 const CONTEXT_FILE = path.join(VAULT_DIR, '.claude-context.md');
 
 let treeWin = null;
@@ -449,11 +450,20 @@ ipcMain.handle('vault:createTree', (_e, label) => {
 ipcMain.handle('vault:deleteTree', (_e, id) => {
   const reg = readRegistry();
   if (reg.active === id) return false; // Cannot delete active tree
-  if (!reg.trees.find(t => t.id === id)) return false;
+  const treeEntry = reg.trees.find(t => t.id === id);
+  if (!treeEntry) return false;
 
   const treeDir = path.join(TREES_DIR, id);
   if (fs.existsSync(treeDir)) {
-    fs.rmSync(treeDir, { recursive: true, force: true });
+    // Soft delete: move to .trash/ with timestamp
+    fs.mkdirSync(TRASH_DIR, { recursive: true });
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const trashName = `${id}_${timestamp}`;
+    const trashDest = path.join(TRASH_DIR, trashName);
+    // Save metadata for potential recovery
+    const meta = { id, label: treeEntry.label, deletedAt: new Date().toISOString() };
+    fs.renameSync(treeDir, trashDest);
+    fs.writeFileSync(path.join(trashDest, '.deleted-meta.json'), JSON.stringify(meta, null, 2));
   }
 
   reg.trees = reg.trees.filter(t => t.id !== id);

@@ -1,15 +1,20 @@
-﻿# Konfiguration fuer AI ERP
+# Konfiguration fuer AI ERP
 # Kopiere diese Datei zu config.yaml und trage echte Werte ein:
 #   cp config.example.yaml config.yaml
 #
-# WICHTIG: config.yaml ist in .gitignore ??wird NICHT ins Repo committed.
+# WICHTIG: config.yaml ist in .gitignore — wird NICHT ins Repo committed.
 # Jede Umgebung (lokal, VM) hat ihre eigene config.yaml.
 
 app:
   name: AI ERP
   debug: false
 
-# Fuege hier projekt-spezifische Config hinzu:
-# api_key: YOUR_API_KEY
-# database:
-#   path: data.db
+# Claude API fuer Dokumenten-Extraktion (Modul 1)
+# Key von: https://console.anthropic.com/
+anthropic:
+  api_key: YOUR_ANTHROPIC_API_KEY
+  model: claude-sonnet-4-20250514
+
+# Datenbank
+database:
+  path: src/api/data/invoices.db
