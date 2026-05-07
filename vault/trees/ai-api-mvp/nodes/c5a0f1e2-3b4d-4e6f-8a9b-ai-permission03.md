@@ -95,8 +95,20 @@ src/core/action_levels.py          ← DIESE Komponente
 src/modules/modulbaukasten/
 ├── tool_executor.py               ← Prueft Level vor Ausfuehrung
 │   └── execute_tool(..., confirmed=True)
-└── chat_service.py                ← Confirmation Flow
-    └── confirm_action()           ← Nach User-Bestaetigung
+├── chat_service.py                ← Confirmation Flow
+│   └── confirm_action()           ← Nach User-Bestaetigung
+├── routes.py                      ← POST /chat/{id}/confirm (T2)
+└── t3_routes.py                   ← POST /chat/{id}/confirm (T3)
+
+web/t2/src/components/
+├── ConfirmationCard.vue           ← Preview + Bestaetigen/Abbrechen
+├── ActionBlockedCard.vue          ← Blockiert-Meldung + Redirect
+└── RichBlock.vue                  ← Rendert confirmation_request + action_blocked
+
+web/t3/src/components/
+├── ConfirmationCard.vue           ← (gleich, orange Theme)
+├── ActionBlockedCard.vue          ← (gleich, orange Theme)
+└── RichBlock.vue                  ← (gleich)
 ```
 
 ## Zusammenspiel Permission Gate + Action Levels
@@ -119,6 +131,7 @@ Request kommt rein:
 
 ## Status
 
-- Backend: FERTIG (committed)
-- Frontend (ConfirmationCard.vue, confirm Route): TODO
+- Backend: FERTIG — action_levels.py, tool_executor.py, chat_service.py, 42 Tests
+- Frontend: FERTIG — ConfirmationCard.vue, ActionBlockedCard.vue, confirm Routes (T2+T3), 5 Tests
+- 404 Tests total, alle gruen
 - Progressive Trust (User-konfigurierbare Levels): SPAETER
