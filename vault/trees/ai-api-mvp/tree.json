@@ -1,0 +1,276 @@
+{
+  "nodes": [
+    {
+      "id": "27608828-0091-4959-9e4e-3f27be597022",
+      "title": "1 — UMGEBUNG (zuerst einrichten)",
+      "children": [
+        {
+          "id": "1219ad2a-ff67-4837-b4f4-31ce9bb361e0",
+          "title": "Dev Toolchain (Linter, Hooks, Tests)",
+          "children": []
+        },
+        {
+          "id": "9f984be8-6377-474e-b7ff-dcc709d48f2f",
+          "title": "Tech-Stack & externe APIs",
+          "children": []
+        },
+        {
+          "id": "e1531d64-3b5a-40a2-9299-66a9703da243",
+          "title": "Qualitaetsprozess (CLAUDE.md, Handoff, Wartung)",
+          "children": []
+        },
+        {
+          "id": "979978ea-6e04-47f9-8e19-088c60136af2",
+          "title": "Health-Check (Gruen oder Rot)",
+          "children": []
+        },
+        {
+          "id": "baca2e91-c84f-4288-9881-d09d5a7eee79",
+          "title": "Projekt-Struktur (Claude-Code-freundlich)",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "e1493a7a-14b1-4093-81ba-b7887b31c00e",
+      "title": "2 — KERN (Plattform-Fundament)",
+      "children": [
+        {
+          "id": "abd5e1dd-7883-42e1-b60f-8c6238d222e4",
+          "title": "Datenmodell & Structured Keys (shop_id)",
+          "children": []
+        },
+        {
+          "id": "08f0b286-6936-4863-9a75-fb17cd29b917",
+          "title": "Gateway (Hub-and-Spoke, ein Einstieg, AI-Routing)",
+          "children": []
+        },
+        {
+          "id": "c5a0f1e2-3b4d-4e6f-8a9b-ai-permission01",
+          "title": "AI Permission Gate (Deny-by-Default)",
+          "children": [
+            {
+              "id": "c5a0f1e2-3b4d-4e6f-8a9b-ai-permission02",
+              "title": "AI Action Policies (YAML pro Rolle)",
+              "children": []
+            },
+            {
+              "id": "c5a0f1e2-3b4d-4e6f-8a9b-ai-permission03",
+              "title": "AI Action Levels (L1-L4 Safety Gate)",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "d5595597-d580-4bd5-ae4a-a01972e2bbd9",
+          "title": "Queue pro Entity",
+          "children": []
+        },
+        {
+          "id": "40992195-7e1f-4739-9e20-4202698b121c",
+          "title": "Memory 4 Schichten",
+          "children": []
+        },
+        {
+          "id": "c1c32720-f100-4b5a-b732-426fc5f0e2ff",
+          "title": "7 AI-Readiness-Schichten (T2 + T1)",
+          "children": []
+        },
+        {
+          "id": "9a151745-9080-4dc9-a63b-35e27fbd7db5",
+          "title": "T1 Developer API",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "31104222-001b-4934-a4bb-d918be2a6ba1",
+      "title": "3 — MODULE (Features bauen)",
+      "children": [
+        {
+          "id": "326ab360-9ffe-452b-9c1e-708d63b37468",
+          "title": "MVP-Kern (Auth, Push, Suche, QR, Real-Time)",
+          "children": []
+        },
+        {
+          "id": "c375de9c-ff2e-484a-9417-f7f074fb1b27",
+          "title": "Zweite Welle (Payment, Chat, Bewertungen)",
+          "children": []
+        },
+        {
+          "id": "6f3da404-2fa9-424c-9719-3440af9c8313",
+          "title": "Modul-Typen & Bridge-Module",
+          "children": []
+        },
+        {
+          "id": "36c1380c-8db5-45e0-808d-95ff21a9db49",
+          "title": "Wayfinding (Indoor-Navigation 工廈, QR + Text-Steps)",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "2bcbc9d2-d10b-4a97-8d0b-56e536666084",
+      "title": "4 — OBERFLAECHE (was Nutzer sehen — AI-Chat-First)",
+      "children": [
+        {
+          "id": "a1b2c3d4-2222-4aaa-bbbb-300000000001",
+          "title": "Plattform-Strategie (API Gold, Web first, Wrap, Nativ)",
+          "children": []
+        },
+        {
+          "id": "9301de5f-faf6-451f-8e32-c075ec9126be",
+          "title": "T3 Endkunde (AI-Chat-First, QR-Einstieg)",
+          "children": []
+        },
+        {
+          "id": "bc60e457-cb5d-4095-99a2-d1d1aec580f2",
+          "title": "T2 Shop-Owner (AI-Chat-First, kein klassisches Dashboard)",
+          "children": []
+        },
+        {
+          "id": "7e100602-42f5-409f-b8a8-e592071ada30",
+          "title": "T1 Developer Portal & Docs",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "f9b84f5a-8722-42de-91fb-c51baa9df318",
+      "title": "STRATEGIE (Warum & Fuer Wen)",
+      "children": [
+        {
+          "id": "bebb1507-5638-40f4-b7a4-273318d82e92",
+          "title": "Vision & Regeln",
+          "children": []
+        },
+        {
+          "id": "958b67ce-d7b3-4180-a320-ccaf16b36177",
+          "title": "Zielgruppen (3T)",
+          "children": []
+        },
+        {
+          "id": "3ba6c3a0-a9ab-4bb0-a4ad-91dd841c1d6d",
+          "title": "Positionierung & Hebel",
+          "children": [
+            {
+              "id": "026db121-9543-42c6-bf58-2df3a7f556b2",
+              "title": "Startup-Hebel (Nische + Lokalisierung + Tech-Shift)",
+              "children": []
+            },
+            {
+              "id": "28a8dcf0-3b60-4136-8353-df08725eddfd",
+              "title": "5 Muster angewendet",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "577d2e4a-9d90-404d-b44b-16918c824e24",
+          "title": "Go-to-Market",
+          "children": [
+            {
+              "id": "1d2b1df4-c329-498c-8970-a1862c1f3937",
+              "title": "Standort & Laeden (Riviera Gardens)",
+              "children": [
+                {
+                  "id": "dd0a3aec-e9d0-4de9-8570-dc3fca528830",
+                  "title": "IT-Abgleich: Laeden vs. Module",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "40000d4b-6a76-4c24-8d90-fab7b0a78fe5",
+              "title": "Vertrauenskette & Erster Kontakt",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "2dfaa772-9619-43cc-8019-dc1e502c8f90",
+          "title": "Nutzer gewinnen",
+          "children": []
+        },
+        {
+          "id": "d52cc210-bd8b-4225-97bd-44919b0a7a0e",
+          "title": "Rechtliches & Compliance",
+          "children": []
+        },
+        {
+          "id": "a1b2c3d4-3333-4aaa-bbbb-400000000001",
+          "title": "Sicherheit & Standards (CIA, OWASP, Zero Trust)",
+          "children": [
+            {
+              "id": "b7c8d9e0-1234-4fab-abcd-security00001",
+              "title": "Stufe 1 — Sicherheits-Checkliste (Minimum)",
+              "children": []
+            },
+            {
+              "id": "b7c8d9e0-1234-4fab-abcd-security00002",
+              "title": "Einordnung Bank vs. Wir (HSM, 2FA, SOC)",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "3d7241b0-4867-4bb4-bb9f-faf956376063",
+          "title": "Versicherung & Haftungsschutz — To-Do",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-4444-4aaa-bbbb-500000000001",
+      "title": "PLAN (Gesamtueberblick + Meilensteine)",
+      "children": []
+    },
+    {
+      "id": "a1b2c3d4-1111-4aaa-bbbb-000000000000",
+      "title": "ARCHITEKTUR (3 Schichten + Build-Prozess)",
+      "children": [
+        {
+          "id": "a1b2c3d4-1111-4aaa-bbbb-100000000001",
+          "title": "3 Schichten — KERN / MODULE / ADAPTER",
+          "children": []
+        },
+        {
+          "id": "a1b2c3d4-1111-4aaa-bbbb-100000000002",
+          "title": "4 Iterationen — Build-Reihenfolge",
+          "children": []
+        },
+        {
+          "id": "a1b2c3d4-1111-4aaa-bbbb-100000000003",
+          "title": "Modul-Loop — Wiederkehrender Prozess",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "25e05af4-5887-4954-a5a3-efc326ffc9d4",
+      "title": "REFERENZ (Architektur-Vorbilder)",
+      "children": [
+        {
+          "id": "e154f763-7f97-4f24-acb9-164dcf2cc030",
+          "title": "Von Odoo",
+          "children": []
+        },
+        {
+          "id": "ea60432b-d508-45c4-b4d3-f2dd00cc54ff",
+          "title": "Von Stripe",
+          "children": []
+        },
+        {
+          "id": "df202d72-e4b3-425b-bb88-e2fb84dadf5b",
+          "title": "Von OpenClaw",
+          "children": []
+        },
+        {
+          "id": "3e9c93ab-3536-4fb9-a7e5-554cde1f48a8",
+          "title": "Von Shopify",
+          "children": []
+        }
+      ]
+    }
+  ]
+}
