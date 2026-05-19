@@ -80,6 +80,11 @@
           "id": "9a151745-9080-4dc9-a63b-35e27fbd7db5",
           "title": "T1 Developer API",
           "children": []
+        },
+        {
+          "id": "orch-0001-t3-orchestrator-design",
+          "title": "T3 Orchestrator (Cross-Shop Concierge)",
+          "children": []
         }
       ]
     },
@@ -217,6 +222,11 @@
           "id": "3d7241b0-4867-4bb4-bb9f-faf956376063",
           "title": "Versicherung & Haftungsschutz — To-Do",
           "children": []
+        },
+        {
+          "id": "hkstp-0001-ideation-bewerbung",
+          "title": "HKSTP Ideation ✅ EINGEREICHT 18.05.2026 (Ergebnis ~August)",
+          "children": []
         }
       ]
     },
@@ -242,6 +252,11 @@
         {
           "id": "a1b2c3d4-1111-4aaa-bbbb-100000000003",
           "title": "Modul-Loop — Wiederkehrender Prozess",
+          "children": []
+        },
+        {
+          "id": "arch-0001-ai-system-architecture-principles",
+          "title": "AI System Architecture Principles",
           "children": []
         }
       ]
